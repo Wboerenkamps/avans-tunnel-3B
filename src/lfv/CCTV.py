@@ -45,7 +45,7 @@ class Cameras:
         self.num_cameras = num_cameras
 
         for i in range(num_cameras):
-            start_address = 5100 + (i * 4)
+            start_address = 5004 + (i * 4)
             camera = CCTV(ModbusInstance, start_address)
             self.cameras.append(camera)
 

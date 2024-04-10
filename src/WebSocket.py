@@ -250,6 +250,21 @@ class WebsocketData:
                 data = type["statusSOS"]
                 self.sosStatus = False
                 print(data)
+            case "cctvPreset":
+                data = type["preset"]
+                self.lfv_processing.cameras.cameras[0].SetPreset([data])
+                print(data)
+            case "cctvPreset":
+                pan = type["pan"]
+                
+                tilt = type["tilt"]
+                zoom = type["zoom"]
+                self.lfv_processing.cameras.cameras[0].SetPan([pan])
+                self.lfv_processing.cameras.cameras[0].SetTilt([tilt])
+                self.lfv_processing.cameras.cameras[0].SetPan([zoom])
+                print(pan) 
+                print(tilt) 
+                print(zoom)
 
     
 
