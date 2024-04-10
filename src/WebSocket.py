@@ -261,7 +261,7 @@ class WebsocketData:
                 zoom = type["zoom"]
                 self.lfv_processing.cameras.cameras[0].SetPan([pan])
                 self.lfv_processing.cameras.cameras[0].SetTilt([tilt])
-                self.lfv_processing.cameras.cameras[0].SetPan([zoom])
+                self.lfv_processing.cameras.cameras[0].SetZoom([zoom])
                 print(pan) 
                 print(tilt) 
                 print(zoom)
