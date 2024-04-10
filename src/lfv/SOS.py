@@ -4,7 +4,7 @@ from modbus import *
 MODBUS_SOS_IP = MODBUS_PLC_IP
 
 class SOS:
-    def __init__(self, ModbusInstance: modbus):
+    def __init__(self):
         self.Bereikbaar = 0
 
         self.Zone1_SnelheidsOnderschijding= 0
@@ -20,7 +20,7 @@ class SOS:
         self.Zone2_DisabledDetectiepunten = 0
         self.Zone1_DectorenMetStoring = 0
         self.Zone2_DectorenMetStoring = 0
-        self.ModbusInstance = ModbusInstance
+        self.ModbusInstance = modbus(MODBUS_SOS_IP)
 
 
 

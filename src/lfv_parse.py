@@ -1,6 +1,6 @@
 
 from lfv.Afsluitboom import Afsluitboom
-from lfv.CCTV import Cameras
+from lfv.CCTV import *
 from lfv.Matrixbord import Matrix
 from lfv.Verkeerslicht import Verkeerslicht
 from lfv.Verlichting import Verlichting
@@ -9,15 +9,15 @@ from modbus import *
 
 class process_lfv:
     def __init__(self):
-        self.modbus = modbus()
-        self.Verlichting = Verlichting(self.modbus)
-        self.Sos = SOS(self.modbus)
-        self.Verkeerslicht = Verkeerslicht(self.modbus, 4)
-        self.Matrix = Matrix(self.modbus)
-        self.Afsluitboom = Afsluitboom(self.modbus)
+        #self.modbus = modbus()
+        self.Verlichting = Verlichting()
+        self.Sos = SOS()
+        self.Verkeerslicht = Verkeerslicht(4)
+        self.Matrix = Matrix()
+        self.Afsluitboom = Afsluitboom()
 
         NumberOfCameras = 3
-        self.cameras = Cameras(self.modbus, NumberOfCameras)
+        self.cameras = Cameras(NumberOfCameras)
         
 
     def  detect_conflict(self):

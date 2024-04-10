@@ -4,13 +4,13 @@ from modbus import *
 MODBUS_VERLICHTING_IP = ""
 
 class Zone:
-    def __init__(self, ModbusInstance: modbus, startAddress: int ):
+    def __init__(self, startAddress: int ):
         self.StartAddress = startAddress
         self.niveau = 0
         self.capaciteit_beschikbaar = 0
         self.energieverbruik = 0
         self.branduren = 0
-        self.ModbusInstance = ModbusInstance
+        self.ModbusInstance = modbus(MODBUS_VERLICHTING_IP)
 
         self.SetAutoRegeling([1])
     
@@ -19,7 +19,7 @@ class Zone:
         pass
 
     def SetStand(self, value: int): # value between 0-10
-        self.ModbusInstance.set(MODBUS_VERLICHTING_IP,self.StartAddress+1, value)
+        self.ModbusInstance.set(self.StartAddress+1, value)
 
 
 class Verlichting:
@@ -38,7 +38,7 @@ class Verlichting:
 
     def update(self):
         for zone in self.Zones:
-            regs = self.ModbusInstance.get(MODBUS_VERLICHTING_IP,zone.StartAddress, 6)
+            regs = self.ModbusInstance.get(zone.StartAddress, 6)
             if regs:
                 zone.niveau = regs[2]  
                 zone.capaciteit_beschikbaar = regs[3]
@@ -47,4 +47,4 @@ class Verlichting:
                 self.Bereikbaar = 1
         
     def SetStand(self, value: int):
-        return self.ModbusInstance.set(MODBUS_VERLICHTING_IP,2500, value)
+        return self.ModbusInstance.set(2500, value)

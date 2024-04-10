@@ -4,7 +4,7 @@ from modbus import *
 MODBUS_CCTV_IP = "192.168.10.110"
 
 class CCTV:
-    def __init__(self, ModbusInstance: modbus, start_address: int):
+    def __init__(self, start_address: int):
         self.Bereikbaar = 0
         self.IdentificatieCode = 0
         self.PanStand = 180
@@ -13,10 +13,8 @@ class CCTV:
         self.FocusStand = {}
         self.Diafragma = {}
         self.Preset = 0
-
-        self.ModbusInstance = ModbusInstance
         self.start_address = start_address
-
+        self.ModbusInstance = modbus(MODBUS_CCTV_IP)
         self.SetTilt([self.TiltStand])
         self.SetPan([self.PanStand])
         self.SetPreset([self.Preset])
@@ -24,19 +22,19 @@ class CCTV:
 
     def SetTilt(self, tilt):
             self.TiltStand = tilt
-            self.ModbusInstance.set(MODBUS_CCTV_IP,self.start_address + 1, tilt)
+            self.ModbusInstance.set(self.start_address + 1, tilt)
 
     def SetPan(self, pan):
             self.PanStand = pan
-            self.ModbusInstance.set(MODBUS_CCTV_IP, self.start_address, pan)
+            self.ModbusInstance.set(self.start_address, pan)
 
     def SetZoom(self, zoom):
             self.ZoomStand = zoom
-            self.ModbusInstance.set(MODBUS_CCTV_IP,self.start_address + 2, zoom)
+            self.ModbusInstance.set(self.start_address + 2, zoom)
 
     def SetPreset(self, preset):
             self.Preset = preset
-            self.ModbusInstance.set(MODBUS_CCTV_IP,self.start_address + 3, preset)
+            self.ModbusInstance.set(self.start_address + 3, preset)
 
 class Cameras:
     def __init__(self, ModbusInstance: modbus, num_cameras: int):
